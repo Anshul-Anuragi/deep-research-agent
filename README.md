@@ -34,48 +34,51 @@ The pipeline divides the research workload across specialized, single-responsibi
 
 ```mermaid
 flowchart TD
-    User([👤 User Prompt]) --> CLI[Terminal CLI / main.py]
-    CLI --> Coordinator[🎯 Coordinator Agent]
+    User(["fa:fa-user User Query"]) --> CLI["fa:fa-terminal CLI Entrypoint (main.py)"]
+    CLI --> Coordinator["fa:fa-sitemap Coordinator Agent"]
     
     subgraph Planning ["1. Research Decomposition"]
-        Coordinator --> Plan{Need Clarification?}
-        Plan -- Yes --> UserPrompt[Prompt User for Details]
-        Plan -- No --> Subtopics["Generate Subtopics & Research Plan"]
+        Coordinator --> Plan{"Clarification Required?"}
+        Plan -- Yes --> UserPrompt["fa:fa-question-circle Interactive User Prompt"]
+        Plan -- No --> Subtopics["fa:fa-tasks Structured Subtopics & Plan"]
     end
 
-    subgraph ParallelExec ["2. Parallel Deep Investigation"]
-        Subtopics --> Worker1["🕵️ Researcher 1<br/>(Subtopic A)"]
-        Subtopics --> Worker2["🕵️ Researcher 2<br/>(Subtopic B)"]
-        Subtopics --> Worker3["🕵️ Researcher 3<br/>(Subtopic C)"]
+    subgraph ParallelExec ["2. Parallel Investigation Engine"]
+        Subtopics --> Worker1["fa:fa-microchip Researcher 1 (Subtopic A)"]
+        Subtopics --> Worker2["fa:fa-microchip Researcher 2 (Subtopic B)"]
+        Subtopics --> Worker3["fa:fa-microchip Researcher 3 (Subtopic C)"]
 
-        Worker1 <--> Tools1["🔍 Tavily Web Search<br/>📚 Wikipedia API<br/>📅 Current Date"]
-        Worker2 <--> Tools2["🔍 Tavily Web Search<br/>📚 Wikipedia API<br/>📅 Current Date"]
-        Worker3 <--> Tools3["🔍 Tavily Web Search<br/>📚 Wikipedia API<br/>📅 Current Date"]
+        Worker1 <--> Tools1["fa:fa-search Tavily Web Search<br/>fa:fa-book Wikipedia Query<br/>fa:fa-calendar System Date"]
+        Worker2 <--> Tools2["fa:fa-search Tavily Web Search<br/>fa:fa-book Wikipedia Query<br/>fa:fa-calendar System Date"]
+        Worker3 <--> Tools3["fa:fa-search Tavily Web Search<br/>fa:fa-book Wikipedia Query<br/>fa:fa-calendar System Date"]
     end
 
-    subgraph Persistence ["3. File Storage"]
-        Worker1 --> Note1["📝 research_notes/Title/Subtopic_A.md"]
-        Worker2 --> Note2["📝 research_notes/Title/Subtopic_B.md"]
-        Worker3 --> Note3["📝 research_notes/Title/Subtopic_C.md"]
+    subgraph Persistence ["3. Artifact Persistence"]
+        Worker1 --> Note1[("fa:fa-file-alt research_notes/.../Subtopic_A.md")]
+        Worker2 --> Note2[("fa:fa-file-alt research_notes/.../Subtopic_B.md")]
+        Worker3 --> Note3[("fa:fa-file-alt research_notes/.../Subtopic_C.md")]
     end
 
-    subgraph Synthesis ["4. Final Synthesis"]
-        Note1 --> Writer[✍️ Report Writer Agent]
+    subgraph Synthesis ["4. Report Synthesis"]
+        Note1 --> Writer["fa:fa-pen-fancy Report Writer Agent"]
         Note2 --> Writer
         Note3 --> Writer
-        Writer --> FinalDoc["📄 reports/Research_Title.md<br/>(Executive BLUF + Dense Findings)"]
+        Writer --> FinalDoc[("fa:fa-file-contract reports/...md<br/>Executive BLUF & Cited Findings")]
     end
 
-    FinalDoc --> ResultDisplay([✨ Finished Report])
+    FinalDoc --> ResultDisplay(["fa:fa-check-circle Synthesized Research Report"])
 
-    classDef primary fill:#2563eb,stroke:#1d4ed8,color:#ffffff;
-    classDef agent fill:#0f766e,stroke:#115e59,color:#ffffff;
-    classDef tool fill:#475569,stroke:#334155,color:#ffffff;
-    classDef file fill:#7c3aed,stroke:#6d28d9,color:#ffffff;
+    classDef primary fill:#1e3a8a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef agent fill:#0f766e,stroke:#14b8a6,stroke-width:2px,color:#ffffff;
+    classDef tool fill:#334155,stroke:#64748b,stroke-width:1px,color:#ffffff;
+    classDef file fill:#581c87,stroke:#a855f7,stroke-width:1px,color:#ffffff;
+    classDef decision fill:#854d0e,stroke:#eab308,stroke-width:2px,color:#ffffff;
+
     class User,ResultDisplay primary;
     class Coordinator,Worker1,Worker2,Worker3,Writer agent;
     class Tools1,Tools2,Tools3 tool;
     class Note1,Note2,Note3,FinalDoc file;
+    class Plan decision;
 ```
 
 ---
