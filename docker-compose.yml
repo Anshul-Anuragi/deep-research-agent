@@ -1,0 +1,14 @@
+services:
+  deep-research:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: deep-research-agents:latest
+    container_name: deep-research-agent
+    env_file:
+      - .env
+    volumes:
+      - ./reports:/app/reports
+      - ./research_notes:/app/research_notes
+    stdin_open: true
+    tty: true

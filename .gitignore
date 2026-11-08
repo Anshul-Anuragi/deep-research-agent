@@ -1,0 +1,56 @@
+# Environment & Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# IDE & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Generated research artifacts (keep directory structure via .gitkeep)
+reports/*
+!reports/.gitkeep
+research_notes/*
+!research_notes/.gitkeep
+
+# Logs & temporary files
+*.log
+.coverage
+htmlcov/
+.pytest_cache/
